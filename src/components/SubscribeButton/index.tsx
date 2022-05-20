@@ -2,18 +2,20 @@ import { Box } from "@chakra-ui/react";
 import { signIn, useSession } from "next-auth/react";
 import { getStripeJs } from '../../services/stripe-js'
 import { api } from "../../services/api";
+import { useRouter } from "next/router";
 
-interface SubscribeButtonProps {
-  priceId: string;
-}
-
-export const SubscribeButton = ({ priceId }: SubscribeButtonProps) => {
+export const SubscribeButton = () => {
   const { data: session } = useSession();
-  const stripe = getStripeJs();
+  const router = useRouter();  
 
   async function handleSubscribe() {
     if (!session) {
       signIn("github");
+      return;
+    }
+
+    if (session.activeSubscription) {
+      router.push('/posts');
       return;
     }
 

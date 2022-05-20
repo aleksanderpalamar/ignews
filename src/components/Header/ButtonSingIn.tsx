@@ -2,8 +2,6 @@ import { Box, Text, Avatar, useBreakpointValue, Stack } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-
-
 export function ButtonSingIn() {
   const {data: session} = useSession();   
 
@@ -113,7 +111,7 @@ export function ButtonSingIn() {
       marginLeft="auto"
     >
       <FaGithub size="24" color="#eba417" />
-      <Text as="span">Sign In</Text>
+      Sign In
     </Box>
   );
 };
